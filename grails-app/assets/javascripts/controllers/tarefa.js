@@ -4,7 +4,8 @@ var tarefa = new Vue({
         tarefas: [],
         tarefa: {},
         loading: false,
-        logTarefa: {}
+        logTarefa: {},
+        buscaTitulo: ''
     },
     methods: {
         getTarefas: function(){
@@ -78,6 +79,15 @@ var tarefa = new Vue({
                 this.logTarefa = {};
             }, function(error){
                 console.info(error)
+            })
+        },
+        buscarPorTitulo: function(){
+            this.loading = true;
+            this.$http.get(window.baseUrl+"tarefa/listByTitulo/"+this.buscaTitulo).then(function(resp){
+                this.tarefas = resp.data;
+                this.loading = false;
+            }, function(err){
+                this.loading = false;
             })
         }
     },

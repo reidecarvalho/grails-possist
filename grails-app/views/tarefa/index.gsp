@@ -17,6 +17,20 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-12">
+                            <label for="buscaPorTitulo" class="col-sm-2 control-label">Titulo</label>
+                            <div class="col-sm-12">
+                                <g:textField name="buscaPorTitulo" class="form-control" v-model="buscaTitulo"/>
+                            </div>
+                                <div>
+                                <button class="btn btn-success pull-left" @click="buscarPorTitulo">Pesquisar</button>
+                            </div>
+                            <div>
+                                <button class="btn btn-success pull-left" @click="getTarefas">Todos</button>
+                            </div
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
                             <button class="btn btn-success pull-right" @click="novaTarefa">
                                 Nova Tarefa
                             </button>

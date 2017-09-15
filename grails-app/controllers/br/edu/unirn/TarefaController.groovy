@@ -99,4 +99,23 @@ class TarefaController {
                 logTarefas: logTarefas
         ] as JSON)
     }
+
+    def listByTitulo(){
+        def retorno = []
+
+        Tarefa.findAllByTituloIlike("%" + params?.id + "%").each {
+            retorno.add([
+                    id: it.id,
+                    titulo: it.titulo,
+                    usuarioAbertura: it.usuarioAbertura.email,
+                    usuarioResponsavel: it.usuarioResponsavel?.email,
+                    dataLimite: it.dataLimite.format("dd/MM/yyyy"),
+                    tipoTarefa: it.tipoTarefa.descricao,
+                    statusTarefa: it.statusTarefa.name(),
+                    porcentagem: it.porcentagem
+            ])
+        }
+
+        render retorno as JSON
+    }
 }
