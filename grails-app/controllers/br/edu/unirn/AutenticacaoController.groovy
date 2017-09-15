@@ -1,5 +1,7 @@
 package br.edu.unirn
 
+import grails.converters.JSON
+
 class AutenticacaoController {
 
     def index(){
@@ -21,5 +23,12 @@ class AutenticacaoController {
     def logout(){
         session.invalidate()
         redirect(actionName:"index")
+    }
+
+    def getCurrentUser() {
+        render ([
+                id: session.usuario.id,
+                email: session.usuario.email
+        ] as JSON)
     }
 }

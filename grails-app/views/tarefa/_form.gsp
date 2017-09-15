@@ -14,8 +14,11 @@
 <div class="form-group">
     <label for="usuarioAbertura" class="col-sm-2 control-label">Usuario Abertura</label>
     <div class="col-sm-10">
+
+        <g:textField name="usuarioAbertura" v-if="!tarefa.id" class="form-control" v-model="tarefa.usuarioAbertura.email" :disabled="true"/>
+
         <g:select name="usuarioAbertura" class="form-control" v-model="tarefa.usuarioAbertura" noSelection="['':'-- Selecione --']"
-                  from="${br.edu.unirn.Usuario.list()}" optionValue="email" optionKey="id"/>
+                  from="${br.edu.unirn.Usuario.list()}" optionValue="email" optionKey="id" v-if="tarefa.id"/>
     </div>
 </div>
 <div class="form-group">
@@ -48,6 +51,6 @@
 <div class="form-group">
     <label for="porcentagem" class="col-sm-2 control-label">Porcentagem</label>
     <div class="col-sm-10">
-        <g:field type="number" name="porcentagem" class="form-control" v-model="tarefa.porcentagem"/>
+        <g:select name="porcentagem" from="${(0..100).step(10)}" value="porcentagem" v-model="tarefa.porcentagem"/>
     </div>
 </div>

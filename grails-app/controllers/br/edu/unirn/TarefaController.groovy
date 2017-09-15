@@ -71,4 +71,32 @@ class TarefaController {
 
         render status: 200
     }
+
+    def detail(){
+        Tarefa tarefa = Tarefa.get(params.id)
+
+        def logTarefas = []
+        for (LogTarefa logTarefa : tarefa.logTarefas) {
+            logTarefas << [
+                    dateCreated: logTarefa.dateCreated.format("dd/MM/yyyy"),
+                    usuarioLog: logTarefa.usuarioLog.email,
+                    texto: logTarefa.texto,
+                    statusTarefa: logTarefa.statusTarefa.name(),
+                    porcentagem: logTarefa.porcentagem
+            ]
+        }
+
+        render([
+                id: tarefa.id,
+                titulo: tarefa.titulo,
+                texto: tarefa.texto,
+                usuarioAbertura: tarefa.usuarioAbertura.id,
+                usuarioResponsavel: tarefa.usuarioResponsavel?.id,
+                dataLimite: tarefa.dataLimite.format("dd/MM/yyyy"),
+                tipoTarefa: tarefa.tipoTarefa.id,
+                statusTarefa: tarefa.statusTarefa.name(),
+                porcentagem: tarefa.porcentagem,
+                logTarefas: logTarefas
+        ] as JSON)
+    }
 }
